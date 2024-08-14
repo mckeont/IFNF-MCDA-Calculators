@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Calculators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+        }
+        h1, h2, h3 {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        p, label, select, button, td, th {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #666;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 20px 0 5px;
+            color: #666;
+        }
+        select {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        table.result-table, table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table.result-table th,
+        table.result-table td,
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table.result-table th,
+        th {
+            background-color: #f8f8f8;
+        }
+        .info-icon {
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            border: 2px solid #007BFF;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #f4f4f4;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .partnership {
+            margin-bottom: 20px;
+        }
+
+        .partnership-title {
+            cursor: pointer;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .partnership-options {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .partnership-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .partnership-group label {
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .indicator {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+
+        .partnership-options select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .recommendation-text {
+            font-size: 1.1em;
+            color: #333;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+        .recommendation h3 {
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .recommendation ul li {
+            padding: 5px 0;
+            font-weight: normal;
+            font-size: 1em;
+            color: #333;
+        }
+        .recommendation ul li strong {
+            color: #007BFF;
+        }
+        .recommendation {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .legal-recommendation h3 {
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .legal-recommendation p {
+            margin: 5px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .legal-recommendation .black-text {
+            color: #000;
+        }
+        .legal-recommendation .blue-text {
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .legal-recommendation {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+  <!-- Watershed Health Goals Calculator -->
+  <div class="calculator">
+      <h1>Watershed Health Goals
+        <span class="info-icon" onclick="openModal('modalWatershedHealth')">i</span>
+        </h1>
+      <form id="mcdaForm1">
+          <label>Intervention Purpose:
+              <select id="interventionPurpose1" onchange="updateInterventionType(1)">
+                  <option value="">Select Purpose</option>
+                  <option value="IMPROVED WATER QUALITY">Improved Water Quality</option>
+                  <option value="EROSION CONTROL">Erosion Control</option>
+                  <option value="REDUCED SEDIMENTATION">Reduced Sedimentation</option>
+                  <option value="INCREASED SUPPLY RESILIENCE">Increased Supply Resilience</option>
+                  <option value="WATERSHED LAND CONSERVATION">Watershed Land Conservation</option>
+              </select>
+          </label>
+          <label>Intervention Type:
+              <select id="interventionType1">
+                  <!-- Options will be dynamically added based on the purpose -->
+              </select>
+          </label>
+          <button type="button" onclick="calculateScores()">Calculate</button>
+      </form>
+      <h2>Recommendation:</h2>
+      <span id="description1" class="recommendation-text">Please select an intervention purpose and type.</span>
+      <table class="result-table" style="display:none;">
+          <thead>
+              <tr>
+                  <th>Overall Assessment</th>
+                  <th>Bond Score</th>
+                  <th>CWSRF Score</th>
+                  <th>DWSRF Score</th>
+              </tr>
+          </thead>
+          <tbody id="resultsBody1">
+              <!-- Dynamically inserted rows will go here -->
+          </tbody>
+      </table>
+  </div>
+    <!-- Co-Benefits of Watershed Health Measures Calculator -->
+    <div class="calculator">
+      <h1>Co-Benefits of Watershed Health Measures
+          <span class="info-icon" onclick="openModal('modalCoBenefits')">i</span>
+      </h1>
+        <form id="mcdaForm2">
+            <label>Intervention Purpose:
+                <select id="interventionPurpose2" onchange="updateInterventionType(2)">
+                    <option value="">Select Purpose</option>
+                    <option value="IMPROVED WATER QUALITY">Improved Water Quality</option>
+                    <option value="EROSION CONTROL">Erosion Control</option>
+                    <option value="REDUCED SEDIMENTATION">Reduced Sedimentation</option>
+                    <option value="INCREASED SUPPLY RESILIENCE">Increased Supply Resilience</option>
+                </select>
+            </label>
+            <label>Intervention Type:
+                <select id="interventionType2">
+                    <!-- Options will be dynamically added based on the purpose -->
+                </select>
+            </label>
+            <button type="button" onclick="displayDescription(2)">Calculate</button>
+        </form>
+        <h2>Recommendation:</h2>
+        <span id="description2" class="recommendation-text">Please select an intervention purpose and type.</span>
+    </div>
+    <!-- Legal & Accounting Calculator -->
+    <div class="calculator">
+      <h1>Legal & Accounting
+          <span class="info-icon" onclick="openModal('modalLegalAccounting')">i</span>
+      </h1>
+        <form id="mcdaForm3">
+            <label>Bond Authority:
+                <select id="muniBondStatute3">
+                    <option value="">Select Purpose</option>
+                    <option value="0">Limited to Projects on Utility Owned Property</option>
+                    <option value="2">Projects under utility control</option>
+                    <option value="5">Doesn't Mention Public or Private</option>
+                    <option value="10">Says projects to benefit system</option>
+                </select>
+            </label>
+            <label>Accounting:
+                <select id="muniGovernance3">
+                    <option value="">Select Purpose</option>
+                    <option value="10">Governing Board Has Rate Setting Authority; Will Set Rates to Recover Cost; Rates Likely to Recover Costs</option>
+                    <option value="5">Can Control property where investment is installed via easement/contract</option>
+                    <option value="0">Cannot control property and no control over rate setting</option>
+                </select>
+            </label>
+            <button type="button" onclick="calculateScore()">Calculate</button>
+        </form>
+        <h2>Recommendation:</h2>
+        <span id="recommendationOutput" class="recommendation-text">Please select Bond Authority and Accounting purposes .</span>
+    </div>
+    <!-- Partnerships Calculator -->
+    <div class="calculator">
+      <h1>Partnerships
+          <span class="info-icon" onclick="openModal('modalPartnerships')">i</span>
+      </h1>
+        <form id="partnershipsForm4">
+            <!-- Partnership Type 1: Watershed groups -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="watershedGroupsInPlace" value="10"> Watershed groups in place
+                </label>
+                <label>
+                    <input type="checkbox" id="watershedGroupsInDevelopment" value="5"> Watershed groups in development
+                </label>
+                <label>
+                    <input type="checkbox" id="watershedGroupsNoPartnership" value="0"> No watershed partnership yet
+                </label>
+            </div>
+            <!-- Partnership Type 2: Federal forest-management agencies -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="federalForestInPlace" value="10"> Federal forest-management agencies in place
+                </label>
+                <label>
+                    <input type="checkbox" id="federalForestInDevelopment" value="5"> Federal forest-management agencies in development
+                </label>
+                <label>
+                    <input type="checkbox" id="federalForestNoPartnership" value="0"> No federal forest partnership yet
+                </label>
+            </div>
+            <!-- Partnership Type 3: State forest-management agencies -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="stateForestInPlace" value="10"> State forest-management agencies in place
+                </label>
+                <label>
+                    <input type="checkbox" id="stateForestInDevelopment" value="5"> State forest-management agencies in development
+                </label>
+                <label>
+                    <input type="checkbox" id="stateForestNoPartnership" value="0"> No state forest partnership yet
+                </label>
+            </div>
+            <!-- Partnership Type 4: Neighboring municipalities / water providers -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="neighboringMunicipalitiesInPlace" value="5"> Neighboring municipalities / water providers in place
+                </label>
+                <label>
+                    <input type="checkbox" id="neighboringMunicipalitiesInDevelopment" value="2.5"> Neighboring municipalities / water providers in development
+                </label>
+                <label>
+                    <input type="checkbox" id="neighboringMunicipalitiesNoPartnership" value="0"> No neighboring municipality partnership yet
+                </label>
+            </div>
+            <!-- Partnership Type 5: Academic institutions -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="academicInstitutionsInPlace" value="5"> Academic institutions in place
+                </label>
+                <label>
+                    <input type="checkbox" id="academicInstitutionsInDevelopment" value="2.5"> Academic institutions in development
+                </label>
+                <label>
+                    <input type="checkbox" id="academicInstitutionsNoPartnership" value="0"> No academic partnership yet
+                </label>
+            </div>
+            <!-- Partnership Type 6: Private land owners -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="privateLandOwnersInPlace" value="5"> Private land owners in place
+                </label>
+                <label>
+                    <input type="checkbox" id="privateLandOwnersInDevelopment" value="2.5"> Private land owners in development
+                </label>
+                <label>
+                    <input type="checkbox" id="privateLandOwnersNoPartnership" value="0"> No private land owner partnership yet
+                </label>
+            </div>
+            <!-- Partnership Type 7: Workforce development NGOs -->
+            <div class="partnership-group">
+                <label>
+                    <input type="checkbox" id="workforceNGOsInPlace" value="5"> Workforce development NGOs in place
+                </label>
+                <label>
+                    <input type="checkbox" id="workforceNGOsInDevelopment" value="2.5"> Workforce development NGOs in development
+                </label>
+                <label>
+                    <input type="checkbox" id="workforceNGOsNoPartnership" value="0"> No workforce development partnership yet
+                </label>
+            </div>
+            <button type="button" onclick="calculatePartnershipScore()">Calculate Score</button>
+        </form>
+        <h2>Partnership Status: </h2>
+          <span id="partnershipScoreDescription4" class="recommendation-text">Please select and add partnerships.</span>
+    </div>
+    <!-- Modal Structure for Watershed Health -->
+   <div id="modalWatershedHealth" class="modal">
+       <div class="modal-content">
+           <span class="close" onclick="closeModal('modalWatershedHealth')">&times;</span>
+           <p>Information about Watershed Health Goals Calculator.</p>
+       </div>
+   </div>
+   <!-- Modal Structure for Co-Benefits -->
+   <div id="modalCoBenefits" class="modal">
+       <div class="modal-content">
+           <span class="close" onclick="closeModal('modalCoBenefits')">&times;</span>
+           <p>Information about Co-Benefits of Watershed Health Measures Calculator.</p>
+       </div>
+   </div>
+   <!-- Modal Structure for Legal & Accounting -->
+   <div id="modalLegalAccounting" class="modal">
+       <div class="modal-content">
+           <span class="close" onclick="closeModal('modalLegalAccounting')">&times;</span>
+           <p>Information about Legal & Accounting Calculator.</p>
+       </div>
+   </div>
+   <!-- Modal Structure for Partnerships -->
+   <div id="modalPartnerships" class="modal">
+       <div class="modal-content">
+           <span class="close" onclick="closeModal('modalPartnerships')">&times;</span>
+           <p>Information about Partnerships Calculator.</p>
+       </div>
+   </div>
+
+    <script>
+    const cobenefits_df = [
+        // Improved Water Quality
+        {
+            Intervention_Purpose: "IMPROVED WATER QUALITY",
+            Intervention_Type: "Stream restoration",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "strong correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "strong correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        {
+            Intervention_Purpose: "IMPROVED WATER QUALITY",
+            Intervention_Type: "Wetland/meadow restoration",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        {
+            Intervention_Purpose: "IMPROVED WATER QUALITY",
+            Intervention_Type: "Sediment control",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "strong correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "IMPROVED WATER QUALITY",
+            Intervention_Type: "Prescribed fire",
+            Avoided_Sedimentation: "medium correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "minimal correlation",
+            Economic_Development_Community_Econ_Dev: "minimal correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "IMPROVED WATER QUALITY",
+            Intervention_Type: "Forest Management",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        {
+            Intervention_Purpose: "IMPROVED WATER QUALITY",
+            Intervention_Type: "Process based restoration",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "strong correlation",
+            Recreation_Outcomes: "strong correlation",
+            Economic_Development_Green_Jobs: "strong correlation",
+            Economic_Development_Community_Econ_Dev: "strong correlation",
+            Air_Quality_Improvement: "strong correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        // Erosion Control
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Stream road crossing / forest road enhancements",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "strong correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Aerial mulching",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "minimal correlation",
+            Economic_Development_Community_Econ_Dev: "minimal correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Stream restoration",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "strong correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "strong correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Wetland/meadow restoration",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Sediment control",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "strong correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Prescribed fire",
+            Avoided_Sedimentation: "medium correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "minimal correlation",
+            Economic_Development_Community_Econ_Dev: "minimal correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "EROSION CONTROL",
+            Intervention_Type: "Forest Management",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        // Reduced Sedimentation
+        {
+            Intervention_Purpose: "REDUCED SEDIMENTATION",
+            Intervention_Type: "Stream road crossing / forest road enhancements",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "strong correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "medium correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "REDUCED SEDIMENTATION",
+            Intervention_Type: "Aerial mulching",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "strong correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "medium correlation",
+            Economic_Development_Green_Jobs: "minimal correlation",
+            Economic_Development_Community_Econ_Dev: "minimal correlation",
+            Air_Quality_Improvement: "minimal correlation",
+            Wildlife_Habitat_Biodiversity: "medium correlation"
+        },
+        {
+            Intervention_Purpose: "REDUCED SEDIMENTATION",
+            Intervention_Type: "Stream restoration",
+            Avoided_Sedimentation: "strong correlation",
+            Infrastructure_Risk_Reduction: "medium correlation",
+            Water_Supply_Security: "medium correlation",
+            Recreation_Outcomes: "strong correlation",
+            Economic_Development_Green_Jobs: "medium correlation",
+            Economic_Development_Community_Econ_Dev: "strong correlation",
+            Air_Quality_Improvement: "medium correlation",
+            Wildlife_Habitat_Biodiversity: "strong correlation"
+        },
+        {
+              Intervention_Purpose: "REDUCED SEDIMENTATION",
+              Intervention_Type: "Wetland/meadow restoration",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "medium correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          {
+              Intervention_Purpose: "REDUCED SEDIMENTATION",
+              Intervention_Type: "Sediment control",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "strong correlation",
+              Water_Supply_Security: "strong correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "medium correlation"
+          },
+          {
+              Intervention_Purpose: "REDUCED SEDIMENTATION",
+              Intervention_Type: "Prescribed fire",
+              Avoided_Sedimentation: "medium correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "minimal correlation",
+              Economic_Development_Community_Econ_Dev: "minimal correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "medium correlation"
+          },
+          {
+              Intervention_Purpose: "REDUCED SEDIMENTATION",
+              Intervention_Type: "Forest Management",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "medium correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          {
+              Intervention_Purpose: "REDUCED SEDIMENTATION",
+              Intervention_Type: "Process based restoration",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "strong correlation",
+              Water_Supply_Security: "strong correlation",
+              Recreation_Outcomes: "strong correlation",
+              Economic_Development_Green_Jobs: "strong correlation",
+              Economic_Development_Community_Econ_Dev: "strong correlation",
+              Air_Quality_Improvement: "strong correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          // Increased Supply Resilience
+          {
+              Intervention_Purpose: "INCREASED SUPPLY RESILIENCE",
+              Intervention_Type: "Stream restoration",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "strong correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "strong correlation",
+              Air_Quality_Improvement: "medium correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          {
+              Intervention_Purpose: "INCREASED SUPPLY RESILIENCE",
+              Intervention_Type: "Wetland/meadow restoration",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "medium correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          {
+              Intervention_Purpose: "INCREASED SUPPLY RESILIENCE",
+              Intervention_Type: "Prescribed fire",
+              Avoided_Sedimentation: "medium correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "minimal correlation",
+              Economic_Development_Community_Econ_Dev: "minimal correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "medium correlation"
+          },
+          {
+              Intervention_Purpose: "INCREASED SUPPLY RESILIENCE",
+              Intervention_Type: "Sediment control",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "strong correlation",
+              Water_Supply_Security: "strong correlation",
+              Recreation_Outcomes: "medium correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "medium correlation"
+          },
+          {
+              Intervention_Purpose: "INCREASED SUPPLY RESILIENCE",
+              Intervention_Type: "Process based restoration",
+              Avoided_Sedimentation: "strong correlation",
+              Infrastructure_Risk_Reduction: "strong correlation",
+              Water_Supply_Security: "strong correlation",
+              Recreation_Outcomes: "strong correlation",
+              Economic_Development_Green_Jobs: "strong correlation",
+              Economic_Development_Community_Econ_Dev: "strong correlation",
+              Air_Quality_Improvement: "strong correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          {
+              Intervention_Purpose: "INCREASED SUPPLY RESILIENCE",
+              Intervention_Type: "Invasive species removal",
+              Avoided_Sedimentation: "medium correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "minimal correlation",
+              Economic_Development_Green_Jobs: "minimal correlation",
+              Economic_Development_Community_Econ_Dev: "minimal correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "medium correlation"
+          },
+          // Watershed Land Conservation
+          {
+              Intervention_Purpose: "WATERSHED LAND CONSERVATION",
+              Intervention_Type: "Land acquisition",
+              Avoided_Sedimentation: "medium correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "strong correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          },
+          {
+              Intervention_Purpose: "WATERSHED LAND CONSERVATION",
+              Intervention_Type: "Conservation easements",
+              Avoided_Sedimentation: "medium correlation",
+              Infrastructure_Risk_Reduction: "medium correlation",
+              Water_Supply_Security: "medium correlation",
+              Recreation_Outcomes: "strong correlation",
+              Economic_Development_Green_Jobs: "medium correlation",
+              Economic_Development_Community_Econ_Dev: "medium correlation",
+              Air_Quality_Improvement: "minimal correlation",
+              Wildlife_Habitat_Biodiversity: "strong correlation"
+          }
+      ];
+
+      // Function to calculate and display the recommendation for Legal & Accounting
+function calculateScore() {
+    const bondScore = parseFloat(document.getElementById('muniBondStatute3').value);
+    const accountingScore = parseFloat(document.getElementById('muniGovernance3').value);
+    let bondDescription = getBondAuthorityDescription(bondScore);
+    let accountingDescription = getAccountingDescription(accountingScore);
+    // Display the recommendation
+    document.getElementById('recommendationOutput').innerHTML = `
+        <div class="legal-recommendation">
+            <p><strong class="black-text">Bond Authority:</strong> <span class="blue-text">${bondDescription}</span></p>
+            <p><strong class="black-text">Accounting:</strong> <span class="blue-text">${accountingDescription}</span></p>
+        </div>
+    `;
+}
+// Function to get bond authority description based on the score
+function getBondAuthorityDescription(score) {
+    switch (score) {
+        case 10: return "Water provider very likely has authority to bond finance upstream interventions";
+        case 5: return "Water provider likely has authority to bond finance upstream interventions";
+        case 2: return "Water provider may have authority to bond finance upstream interventions";
+        default: return "Water provider does not yet have authority to bond finance upstream interventions";
+    }
+}
+// Function to get accounting description based on the score
+function getAccountingDescription(score) {
+    switch (score) {
+        case 10: return "Water provider can use streamlined regulated operations accounting";
+        case 5: return "Water provider must use traditional accounting";
+        default: return "Water provider does not yet have a pathway for proper accounting of upstream interventions";
+    }
+}
+      function calculateScores() {
+    const purpose = document.getElementById('interventionPurpose1').value;
+    const type = document.getElementById('interventionType1').value;
+
+    if (!purpose || !type) {
+        document.getElementById('description1').innerText = 'Please select an intervention purpose and type.';
+        return;
+    }
+    const scores = scoreMatrix[type] || {}; // Get scores from the matrix or an empty object if not found
+    const overallScore = scores['Bond'] + scores['CWSRF'] + scores['DWSRF'];
+
+    let description = 'No description available for this combination.';
+
+    if (outcomes[overallScore] && outcomes[overallScore][purpose]) {
+        description = outcomes[overallScore][purpose].replace('[Intervention type]', type);
+    }
+
+    document.getElementById('description1').innerHTML = description;
+
+    const resultsBody = document.getElementById('resultsBody1');
+    resultsBody.innerHTML = `
+        <tr>
+            <td>${getOverallDescription(overallScore)}</td>
+            <td>${scores.Bond}</td>
+            <td>${scores.CWSRF}</td>
+            <td>${scores.DWSRF}</td>
+        </tr>
+    `;
+}
+
+function calculatePartnershipScore() {
+    let totalScore = 0;
+
+    const checkboxes = document.querySelectorAll('#partnershipsForm4 input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            totalScore += parseFloat(checkbox.value);
+        }
+    });
+
+    let description = '';
+
+    if (totalScore >= 40) {
+        description = `
+            <strong>All Important Partnerships In Place</strong>:
+            <span style="color: #007BFF;">Utility has partnerships in place with each of the types of organizations that can help support successful implementation of upstream watershed health and wildfire mitigation interventions.</span>
+        `;
+    } else if (totalScore >= 35 && totalScore < 40) {
+        description = `
+            <strong>Mostly All Important Partnerships In Place or In Progress</strong>:
+            <span style="color: #007BFF;">Utility has partnerships in place with key watershed groups and federal and state agencies which are key to helping support successful implementation of upstream watershed health and wildfire mitigation interventions and is working on important relationships with other supportive partners.</span>
+        `;
+    } else if (totalScore >= 25 && totalScore < 35) {
+        description = `
+            <strong>Important Partnerships in Progress</strong>:
+            <span style="color: #007BFF;">Utility is working on developing partnerships with each of the types of organizations that can help support successful implementation of upstream watershed health and wildfire mitigation interventions.</span>
+        `;
+    } else {
+        description = `
+            <strong>Mostly All Important Partnerships In Progress or Not Yet In Place</strong>:
+            <span style="color: #007BFF;">Utility is working on developing important partnerships to ensure success or has not yet begun this process. Pursuing these partnerships will help ensure successful implementation of upstream watershed health and wildfire mitigation interventions.</span>
+        `;
+    }
+
+    document.getElementById('partnershipScoreDescription4').innerHTML = description;
+}
+
+    function toggleOptions(id) {
+        const options = document.getElementById(id);
+        options.style.display = options.style.display === "block" ? "none" : "block";
+    }
+
+    const interventions = {
+  'IMPROVED WATER QUALITY': [
+      'Stream restoration',
+      'Wetland/meadow restoration',
+      'Sediment control',
+      'Prescribed fire',
+      'Forest Management',
+      'Process based restoration'
+  ],
+  'EROSION CONTROL': [
+      'Stream road crossing / forest road enhancements',
+      'Aerial mulching',
+      'Stream restoration',
+      'Wetland/meadow restoration',
+      'Sediment control',
+      'Prescribed fire',
+      'Forest Management'
+  ],
+  'REDUCED SEDIMENTATION': [
+      'Stream road crossing / forest road enhancements',
+      'Aerial mulching',
+      'Stream restoration',
+      'Wetland/meadow restoration',
+      'Sediment control',
+      'Prescribed fire',
+      'Forest Management',
+      'Process based restoration'
+  ],
+  'INCREASED SUPPLY RESILIENCE': [
+      'Stream restoration',
+      'Wetland/meadow restoration',
+      'Prescribed fire',
+      'Sediment control',
+      'Process based restoration',
+      'Invasive species removal'
+  ],
+  'WATERSHED LAND CONSERVATION': [
+      'Land acquisition',
+      'Conservation easements'
+  ]
+};
+
+  const scoreMatrix = {
+      'Stream restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 },
+      'Wetland/meadow restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
+      'Sediment control': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 },
+      'Prescribed fire': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
+      'Forest Management': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
+      'Process based restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
+      'Stream road crossing / forest road enhancements': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
+      'Aerial mulching': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
+      'Invasive species removal': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 },
+      'Land acquisition': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
+      'Conservation easements': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }
+  };
+
+    function updateInterventionType(id) {
+        const purpose = document.getElementById('interventionPurpose' + id).value;
+        const typeSelect = document.getElementById('interventionType' + id);
+        typeSelect.innerHTML = '<option value="">Select Type</option>'; // Clear previous options
+
+        if (purpose && interventions[purpose]) {
+            interventions[purpose].forEach(function(type) {
+                const option = document.createElement('option');
+                option.value = type;
+                option.text = type;
+                typeSelect.appendChild(option);
+            });
+        }
+    }
+
+    const outcomes = {
+    30: {
+      'IMPROVED WATER QUALITY': `
+        <strong style="background-color: yellow;">IMPROVED WATER QUALITY</strong>:
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to improve water quality are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans,
+        and the Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'EROSION CONTROL': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to mitigate erosion are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans,
+        and the Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'REDUCED SEDIMENTATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to reduce sedimentation are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans,
+        and the Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'INCREASED SUPPLY RESILIENCE': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to increase water supply resilience are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans,
+        and the Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'WATERSHED LAND CONSERVATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to protect watershed land from significant development are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans,
+        and the Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    },
+    25: {
+      'IMPROVED WATER QUALITY': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to improve water quality are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions <span style="background-color: lime;"> may also be suitable </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'EROSION CONTROL': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to mitigate erosion are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions <span style="background-color: lime;"> may also be suitable </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'REDUCED SEDIMENTATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to reduce sedimentation are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions <span style="background-color: lime;"> may also be suitable </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'INCREASED SUPPLY RESILIENCE': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to increase water supply resilience are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions <span style="background-color: lime;"> may also be suitable </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'WATERSHED LAND CONSERVATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to protect watershed land from significant development are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions <span style="background-color: lime;"> may also be suitable </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    },
+    22: {
+      'IMPROVED WATER QUALITY': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to improve water quality are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions' <span style="background-color: lime;"> suitability </span>
+        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'EROSION CONTROL': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to mitigate erosion are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions' <span style="background-color: lime;"> suitability </span>
+        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'REDUCED SEDIMENTATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to reduce sedimentation are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions' <span style="background-color: lime;"> suitability </span>
+        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'INCREASED SUPPLY RESILIENCE': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to increase water supply resilience are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions' <span style="background-color: lime;"> suitability </span>
+        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'WATERSHED LAND CONSERVATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to protect watershed land from development are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions' <span style="background-color: lime;"> suitability </span>
+        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    },
+    20: {
+      'IMPROVED WATER QUALITY': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to improve water quality <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions' <span style="background-color: lime;"> suitability </span>
+        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'EROSION CONTROL': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to mitigate erosion are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'REDUCED SEDIMENTATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to reduce sedimentation are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'INCREASED SUPPLY RESILIENCE': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to increase water supply resilience are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'WATERSHED LAND CONSERVATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to protect watershed land from development are
+        <span style="background-color: lime;">likely to be suitable</span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    },
+    15: {
+      'EROSION CONTROL': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to mitigate erosion <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds, and are <span style="background-color: lime;"> likely suitable </span>
+        for Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans, however.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    },
+    10: {
+      'IMPROVED WATER QUALITY': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to improve water quality <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans, however.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'EROSION CONTROL': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to mitigate erosion <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans, however.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'REDUCED SEDIMENTATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to reduce sedimentation <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans, however.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'INCREASED SUPPLY RESILIENCE': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to reduce sedimentation <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans, however.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+      'WATERSHED LAND CONSERVATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to protect watershed land from significant development <span style="background-color: lime;"> may be suitable </span>
+        to be financed alongside conventional water infrastructure investments with
+        municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans, however.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    },
+    7: {
+      'WATERSHED LAND CONSERVATION': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to protect watershed land from significant development <span style="background-color: lime;"> may be suitable </span>
+        to be financed alongside conventional water infrastructure investments with municipal bonds.
+        Whether these interventions are suitable for Colorado Water Pollution Control Revolving Fund loans <span style="background-color: lime;"> is unclear, however. </span>
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans.
+        <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
+        to learn more about financing wildfire resilience interventions.
+      `,
+    }
+  };
+
+        function getBondAuthorityDescription(score) {
+            switch (score) {
+                case 10: return "Water provider very likely has authority to bond finance upstream interventions";
+                case 5: return "Water provider likely has authority to bond finance upstream interventions";
+                case 2: return "Water provider may have authority to bond finance upstream interventions";
+                default: return "Water provider does not yet have authority to bond finance upstream interventions";
+            }
+        }
+
+        function getAccountingDescription(score) {
+            switch (score) {
+                case 10: return "Water provider can use streamlined regulated operations accounting";
+                case 5: return "Water provider must use traditional accounting";
+                default: return "Water provider does not yet have a pathway for proper accounting of upstream interventions";
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        }
+
+        function getCorrelationText(score) {
+    switch(score) {
+        case 10: return "strong correlation";
+        case 5: return "medium correlation";
+        case 0: return "minimal correlation";
+        default: return "no data";
+    }
+}
+
+function displayDescription(id) {
+    const purpose = document.getElementById('interventionPurpose' + id).value;
+    const type = document.getElementById('interventionType' + id).value;
+
+    if (!purpose || !type) {
+        document.getElementById('description' + id).innerText = 'Please select an intervention purpose and type.';
+        return;
+    }
+
+    if (id === 1) {
+        const scores = scoreMatrix[type] || {};
+        const overallScore = scores['Bond'] + scores['CWSRF'] + scores['DWSRF'];
+
+        let description = 'No description available for this combination.';
+
+        if (outcomes[overallScore] && outcomes[overallScore][purpose]) {
+            description = outcomes[overallScore][purpose].replace('[Intervention type]', type);
+        }
+
+        document.getElementById('description1').innerHTML = description;
+
+        const resultsBody = document.getElementById('resultsBody1');
+        resultsBody.innerHTML = `
+            <tr>
+                <td>${getOverallDescription(overallScore)}</td>
+                <td>${scores.Bond}</td>
+                <td>${scores.CWSRF}</td>
+                <td>${scores.DWSRF}</td>
+            </tr>
+        `;
+
+    } else if (id === 2) {
+        const row = cobenefits_df.find(row => row.Intervention_Purpose === purpose && row.Intervention_Type === type);
+
+        if (!row) {
+            document.getElementById('description' + id).innerText = 'Data not found for the selected intervention type.';
+            return;
+        }
+
+        const description = `
+            <div class="recommendation">
+                <h3><strong>${purpose} - ${type}</strong></h3>
+                <ul>
+                    <li><strong style="color: black;">Avoided Sedimentation / Water Quality Improvements:</strong> <strong style="color: #007BFF;">${row.Avoided_Sedimentation}</strong></li>
+                    <li><strong style="color: black;">Infrastructure Risk Reduction:</strong> <strong style="color: #007BFF;">${row.Infrastructure_Risk_Reduction}</strong></li>
+                    <li><strong style="color: black;">Water Supply Security / Cost of Supply:</strong> <strong style="color: #007BFF;">${row.Water_Supply_Security}</strong></li>
+                    <li><strong style="color: black;">Recreation Outcomes:</strong> <strong style="color: #007BFF;">${row.Recreation_Outcomes}</strong></li>
+                    <li><strong style="color: black;">Economic Development (Green Jobs):</strong> <strong style="color: #007BFF;">${row.Economic_Development_Green_Jobs}</strong></li>
+                    <li><strong style="color: black;">Economic Development (Community econ dev):</strong> <strong style="color: #007BFF;">${row.Economic_Development_Community_Econ_Dev}</strong></li>
+                    <li><strong style="color: black;">Air Quality Improvement:</strong> <strong style="color: #007BFF;">${row.Air_Quality_Improvement}</strong></li>
+                    <li><strong style="color: black;">Wildlife Habitat & Biodiversity:</strong> <strong style="color: #007BFF;">${row.Wildlife_Habitat_Biodiversity}</strong></li>
+                </ul>
+            </div>
+        `;
+
+        document.getElementById('description' + id).innerHTML = description;
+
+        const resultsBody = document.getElementById('resultsBody2');
+        resultsBody.innerHTML = `
+            <tr>
+                <td>${purpose}</td>
+                <td>${type}</td>
+                <td>${row.Avoided_Sedimentation}</td>
+                <td>${row.Infrastructure_Risk_Reduction}</td>
+                <td>${row.Water_Supply_Security}</td>
+                <td>${row.Recreation_Outcomes}</td>
+                <td>${row.Economic_Development_Green_Jobs}, ${row.Economic_Development_Community_Econ_Dev}</td>
+                <td>${row.Air_Quality_Improvement}</td>
+                <td>${row.Wildlife_Habitat_Biodiversity}</td>
+                <td>${getOverallDescription(overallScore)}</td>
+                <td>${overallScore}</td>
+            </tr>
+        `;
+    }
+}
+
+function getOverallDescription(totalScore) {
+    if (totalScore >= 25) return 'Highly Recommended';
+    if (totalScore >= 20) return 'Recommended with Caution';
+    return 'Not Recommended';
+}
+    </script>
+</body>
+</html>
