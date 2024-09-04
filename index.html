@@ -985,20 +985,19 @@ function calculatePartnershipScore() {
   ]
 };
 
-const scoreMatrix = {
-    'Stream restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 } },
-    'Wetland/meadow restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
-    'Sediment control': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 } },
-    'Prescribed fire': { 'IMPROVED WATER QUALITY': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
-    'Forest Management': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
-    'Process based restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
-    'Stream road crossing / forest road enhancements': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
-    'Aerial mulching': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
-    'Invasive species removal': { 'INCREASED SUPPLY RESILIENCE': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 } },
-    'Land acquisition': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
-    'Conservation easements': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } }
-};
-
+  const scoreMatrix = {
+      'Stream restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 },
+      'Wetland/meadow restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
+      'Sediment control': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 },
+      'Prescribed fire': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
+      'Forest Management': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
+      'Process based restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
+      'Stream road crossing / forest road enhancements': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
+      'Aerial mulching': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
+      'Invasive species removal': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 },
+      'Land acquisition': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
+      'Conservation easements': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }
+  };
 
     function updateInterventionType(id) {
         const purpose = document.getElementById('interventionPurpose' + id).value;
@@ -1018,6 +1017,7 @@ const scoreMatrix = {
     const outcomes = {
     30: {
       'IMPROVED WATER QUALITY': `
+        <strong style="background-color: yellow;">IMPROVED WATER QUALITY</strong>:
         <span style="background-color: yellow;">[Intervention type]</span>
         projects designed to improve water quality are
         <span style="background-color: lime;">likely to be suitable</span>
