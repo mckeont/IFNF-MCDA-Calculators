@@ -857,22 +857,47 @@ function getAccountingDescription(score) {
         default: return "Water provider does not yet have a pathway for proper accounting of upstream interventions";
     }
 }
-      function calculateScores() {
+function calculateScores() {
     const purpose = document.getElementById('interventionPurpose1').value;
     const type = document.getElementById('interventionType1').value;
+
+    // Log the selected purpose and type
+    console.log("Purpose: ", purpose);
+    console.log("Type: ", type);
 
     if (!purpose || !type) {
         document.getElementById('description1').innerText = 'Please select an intervention purpose and type.';
         return;
     }
-    const scores = scoreMatrix[type] || {}; // Get scores from the matrix or an empty object if not found
-    const overallScore = scores['Bond'] + scores['CWSRF'] + scores['DWSRF'];
+
+    // Access the correct scores for the selected purpose and type
+    const typeScores = scoreMatrix[type];
+
+    // Log the type scores (the object containing purposes for the selected type)
+    console.log("Type Scores: ", typeScores);
+
+    if (!typeScores || !typeScores[purpose]) {
+        document.getElementById('description1').innerText = 'No description available for this combination.';
+        return;
+    }
+
+    const scores = typeScores[purpose]; // Now accessing the nested object
+
+    // Log the scores for the selected purpose and type
+    console.log("Scores: ", scores);
+
+    const overallScore = scores.Bond + scores.CWSRF + scores.DWSRF;
+
+    // Log the overall score
+    console.log("Overall Score: ", overallScore);
 
     let description = 'No description available for this combination.';
 
     if (outcomes[overallScore] && outcomes[overallScore][purpose]) {
         description = outcomes[overallScore][purpose].replace('[Intervention type]', type);
     }
+
+    console.log("Recommendation Description: ", description);
 
     document.getElementById('description1').innerHTML = description;
 
@@ -887,10 +912,10 @@ function getAccountingDescription(score) {
     `;
 }
 
+
 function calculatePartnershipScore() {
     let totalScore = 0;
 
-    // Query all radio groups related to partnership types
     const partnershipTypes = [
         'watershedGroups',
         'federalForest',
@@ -902,7 +927,6 @@ function calculatePartnershipScore() {
     ];
 
     partnershipTypes.forEach(partnershipType => {
-        // Get the selected radio button for each partnership type
         const selectedOption = document.querySelector(`input[name="${partnershipType}"]:checked`);
 
         if (selectedOption) {
@@ -985,19 +1009,20 @@ function calculatePartnershipScore() {
   ]
 };
 
-  const scoreMatrix = {
-      'Stream restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 },
-      'Wetland/meadow restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
-      'Sediment control': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 },
-      'Prescribed fire': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
-      'Forest Management': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
-      'Process based restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
-      'Stream road crossing / forest road enhancements': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
-      'Aerial mulching': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
-      'Invasive species removal': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 },
-      'Land acquisition': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
-      'Conservation easements': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }
-  };
+const scoreMatrix = {
+    'Stream restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 } },
+    'Wetland/meadow restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
+    'Sediment control': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 } },
+    'Prescribed fire': { 'IMPROVED WATER QUALITY': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
+    'Forest Management': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Process based restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Stream road crossing / forest road enhancements': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Aerial mulching': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
+    'Invasive species removal': { 'INCREASED SUPPLY RESILIENCE': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 } },
+    'Land acquisition': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
+    'Conservation easements': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } }
+};
+
 
     function updateInterventionType(id) {
         const purpose = document.getElementById('interventionPurpose' + id).value;
@@ -1017,7 +1042,6 @@ function calculatePartnershipScore() {
     const outcomes = {
     30: {
       'IMPROVED WATER QUALITY': `
-        <strong style="background-color: yellow;">IMPROVED WATER QUALITY</strong>:
         <span style="background-color: yellow;">[Intervention type]</span>
         projects designed to improve water quality are
         <span style="background-color: lime;">likely to be suitable</span>
@@ -1188,8 +1212,8 @@ function calculatePartnershipScore() {
         projects designed to improve water quality <span style="background-color: lime;"> may be suitable </span> to be financed
         alongside conventional water infrastructure investments with
         municipal bonds and Colorado Water Pollution Control Revolving Fund loans.
-        These interventions' <span style="background-color: lime;"> suitability </span>
-        for financing with Drinking Water Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+        These interventions are <span style="background-color: lime;"> likely not eligible </span>
+        for financing with Drinking Water Revolving Fund loans.
         <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
         to learn more about financing wildfire resilience interventions.
       `,
