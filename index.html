@@ -354,85 +354,85 @@
             <!-- Partnership Type 1: Watershed groups -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="watershedGroupsInPlace" value="10"> Watershed groups in place
+                    <input type="radio" name="watershedGroups" id="watershedGroupsInPlace" value="10"> Watershed groups in place
                 </label>
                 <label>
-                    <input type="checkbox" id="watershedGroupsInDevelopment" value="5"> Watershed groups in development
+                    <input type="radio" name="watershedGroups" id="watershedGroupsInDevelopment" value="5"> Watershed groups in development
                 </label>
                 <label>
-                    <input type="checkbox" id="watershedGroupsNoPartnership" value="0"> No watershed partnership yet
+                    <input type="radio" name="watershedGroups" id="watershedGroupsNoPartnership" value="0"> No watershed partnership yet
                 </label>
             </div>
             <!-- Partnership Type 2: Federal forest-management agencies -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="federalForestInPlace" value="10"> Federal forest-management agencies in place
+                    <input type="radio" name="federalForest" id="federalForestInPlace" value="10"> Federal forest-management agencies in place
                 </label>
                 <label>
-                    <input type="checkbox" id="federalForestInDevelopment" value="5"> Federal forest-management agencies in development
+                    <input type="radio" name="federalForest" id="federalForestInDevelopment" value="5"> Federal forest-management agencies in development
                 </label>
                 <label>
-                    <input type="checkbox" id="federalForestNoPartnership" value="0"> No federal forest partnership yet
+                    <input type="radio" name="federalForest" id="federalForestNoPartnership" value="0"> No federal forest partnership yet
                 </label>
             </div>
             <!-- Partnership Type 3: State forest-management agencies -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="stateForestInPlace" value="10"> State forest-management agencies in place
+                    <input type="radio" name="stateForest"  id="stateForestInPlace" value="10"> State forest-management agencies in place
                 </label>
                 <label>
-                    <input type="checkbox" id="stateForestInDevelopment" value="5"> State forest-management agencies in development
+                    <input type="radio" name="stateForest"  id="stateForestInDevelopment" value="5"> State forest-management agencies in development
                 </label>
                 <label>
-                    <input type="checkbox" id="stateForestNoPartnership" value="0"> No state forest partnership yet
+                    <input type="radio" name="stateForest"  id="stateForestNoPartnership" value="0"> No state forest partnership yet
                 </label>
             </div>
             <!-- Partnership Type 4: Neighboring municipalities / water providers -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="neighboringMunicipalitiesInPlace" value="5"> Neighboring municipalities / water providers in place
+                    <input type="radio" name="neighboringMunicipalities" id="neighboringMunicipalitiesInPlace" value="5"> Neighboring municipalities / water providers in place
                 </label>
                 <label>
-                    <input type="checkbox" id="neighboringMunicipalitiesInDevelopment" value="2.5"> Neighboring municipalities / water providers in development
+                    <input type="radio" name="neighboringMunicipalities" id="neighboringMunicipalitiesInDevelopment" value="2.5"> Neighboring municipalities / water providers in development
                 </label>
                 <label>
-                    <input type="checkbox" id="neighboringMunicipalitiesNoPartnership" value="0"> No neighboring municipality partnership yet
+                    <input type="radio" name="neighboringMunicipalities" id="neighboringMunicipalitiesNoPartnership" value="0"> No neighboring municipality partnership yet
                 </label>
             </div>
             <!-- Partnership Type 5: Academic institutions -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="academicInstitutionsInPlace" value="5"> Academic institutions in place
+                    <input type="radio" name="academicInstitutions" id="academicInstitutionsInPlace" value="5"> Academic institutions in place
                 </label>
                 <label>
-                    <input type="checkbox" id="academicInstitutionsInDevelopment" value="2.5"> Academic institutions in development
+                    <input type="radio" name="academicInstitutions" id="academicInstitutionsInDevelopment" value="2.5"> Academic institutions in development
                 </label>
                 <label>
-                    <input type="checkbox" id="academicInstitutionsNoPartnership" value="0"> No academic partnership yet
+                    <input type="radio" name="academicInstitutions" id="academicInstitutionsNoPartnership" value="0"> No academic partnership yet
                 </label>
             </div>
             <!-- Partnership Type 6: Private land owners -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="privateLandOwnersInPlace" value="5"> Private land owners in place
+                    <input type="radio" name="privateLandOwners" id="privateLandOwnersInPlace" value="5"> Private land owners in place
                 </label>
                 <label>
-                    <input type="checkbox" id="privateLandOwnersInDevelopment" value="2.5"> Private land owners in development
+                    <input type="radio" name="privateLandOwners" id="privateLandOwnersInDevelopment" value="2.5"> Private land owners in development
                 </label>
                 <label>
-                    <input type="checkbox" id="privateLandOwnersNoPartnership" value="0"> No private land owner partnership yet
+                    <input type="radio" name="privateLandOwners" id="privateLandOwnersNoPartnership" value="0"> No private land owner partnership yet
                 </label>
             </div>
             <!-- Partnership Type 7: Workforce development NGOs -->
             <div class="partnership-group">
                 <label>
-                    <input type="checkbox" id="workforceNGOsInPlace" value="5"> Workforce development NGOs in place
+                    <input type="radio" name="workforceNGOs" id="workforceNGOsInPlace" value="5"> Workforce development NGOs in place
                 </label>
                 <label>
-                    <input type="checkbox" id="workforceNGOsInDevelopment" value="2.5"> Workforce development NGOs in development
+                    <input type="radio" name="workforceNGOs" id="workforceNGOsInDevelopment" value="2.5"> Workforce development NGOs in development
                 </label>
                 <label>
-                    <input type="checkbox" id="workforceNGOsNoPartnership" value="0"> No workforce development partnership yet
+                    <input type="radio" name="workforceNGOs" id="workforceNGOsNoPartnership" value="0"> No workforce development partnership yet
                 </label>
             </div>
             <button type="button" onclick="calculatePartnershipScore()">Calculate Score</button>
@@ -890,10 +890,23 @@ function getAccountingDescription(score) {
 function calculatePartnershipScore() {
     let totalScore = 0;
 
-    const checkboxes = document.querySelectorAll('#partnershipsForm4 input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            totalScore += parseFloat(checkbox.value);
+    // Query all radio groups related to partnership types
+    const partnershipTypes = [
+        'watershedGroups',
+        'federalForest',
+        'stateForest',
+        'neighboringMunicipalities',
+        'academicInstitutions',
+        'privateLandOwners',
+        'workforceNGOs'
+    ];
+
+    partnershipTypes.forEach(partnershipType => {
+        // Get the selected radio button for each partnership type
+        const selectedOption = document.querySelector(`input[name="${partnershipType}"]:checked`);
+
+        if (selectedOption) {
+            totalScore += parseFloat(selectedOption.value);
         }
     });
 
@@ -923,6 +936,7 @@ function calculatePartnershipScore() {
 
     document.getElementById('partnershipScoreDescription4').innerHTML = description;
 }
+
 
     function toggleOptions(id) {
         const options = document.getElementById(id);
@@ -971,19 +985,20 @@ function calculatePartnershipScore() {
   ]
 };
 
-  const scoreMatrix = {
-      'Stream restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 },
-      'Wetland/meadow restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
-      'Sediment control': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 },
-      'Prescribed fire': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
-      'Forest Management': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
-      'Process based restoration': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
-      'Stream road crossing / forest road enhancements': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 },
-      'Aerial mulching': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 },
-      'Invasive species removal': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 },
-      'Land acquisition': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 },
-      'Conservation easements': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }
-  };
+const scoreMatrix = {
+    'Stream restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 } },
+    'Wetland/meadow restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
+    'Sediment control': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 } },
+    'Prescribed fire': { 'IMPROVED WATER QUALITY': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
+    'Forest Management': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Process based restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Stream road crossing / forest road enhancements': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Aerial mulching': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
+    'Invasive species removal': { 'INCREASED SUPPLY RESILIENCE': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 } },
+    'Land acquisition': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
+    'Conservation easements': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } }
+};
+
 
     function updateInterventionType(id) {
         const purpose = document.getElementById('interventionPurpose' + id).value;
@@ -1003,7 +1018,6 @@ function calculatePartnershipScore() {
     const outcomes = {
     30: {
       'IMPROVED WATER QUALITY': `
-        <strong style="background-color: yellow;">IMPROVED WATER QUALITY</strong>:
         <span style="background-color: yellow;">[Intervention type]</span>
         projects designed to improve water quality are
         <span style="background-color: lime;">likely to be suitable</span>
