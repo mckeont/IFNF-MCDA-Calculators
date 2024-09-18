@@ -451,7 +451,32 @@
    <div id="modalCoBenefits" class="modal">
        <div class="modal-content">
            <span class="close" onclick="closeModal('modalCoBenefits')">&times;</span>
-           <p>Information about Co-Benefits of Watershed Health Measures Calculator.</p>
+           <p>
+               <strong>Avoided sedimentation / water quality improvements</strong><br>
+               Preventing high levels of sediment in source water is highly important for potable water providers, and irrigation districts, because it reduces treatment costs as well as wear and tear on pumps and other machinery. Stream restoration, wetland/meadow restoration, process-based restoration, aerial mulching, and other sediment control practices are strongly correlated with water quality improvement because of their ability to directly reduce erosion or sequester sediment before it enters streams and rivers. Prescribed fire and forest health treatments can also provide avoided sedimentation and water quality improvements, although more indirectly, by reducing the risk of fires. Less frequent or less severe fires are more likely to leave intact soil and plant structures, which, in turn, reduce erosion potential. Some practices, such as land acquisition, conservation easements, and invasive species removal are less strongly correlated with direct or indirect water quality benefits. Learn more about how to assess the value of these benefits here.<br><br>
+
+               <strong>Infrastructure Risk Reduction</strong><br>
+               Wildfires can pose an obvious risk to water supply infrastructure, including diversion points, reservoirs, intakes, and conveyances. Post-fire conditions can also threaten the security and functionality of critical infrastructure through heightened risk of debris flows and sedimentation. Watershed and forest health projects that reduce the risk of catastrophic wildfire can have a high correlation with reduced infrastructure replacement or repair costs. Sediment control and erosion prevention projects likewise can reduce post-fire risks to water supply systems. Projects intended to build longer-term resilience, such as meadow and stream restoration, and process-based restoration projects, also have the capacity to reduce infrastructure risks.<br><br>
+
+               <strong>Water Supply Security / Cost of Supply</strong><br>
+               Wildfire, and the after-effects of wildfire, can create risks of interruption for water supply providers. These disruptions can result in economic and human health impacts within the customer community and may require providers to pay for replacement water from other sources. Sediment control practices and other projects that reduce the risk of post-fire erosion have a high correlation with avoided supply disruptions and water supply security. Longer-term projects such as forest, stream, and meadow restoration projects that reduce fire risk and stabilize watershed health have a medium correlation with water supply security. Learn more about how to assess the value of these benefits here.<br><br>
+
+               <strong>Recreation Outcomes</strong><br>
+               Water supply watersheds across the West are typically located on public lands, often managed by federal and state agencies. These lands provide high-quality recreation opportunities for hiking, camping, fishing, boating, birdwatching, and other activities. These values can be negatively affected by wildfire or by overgrown forest conditions that impair or threaten recreational access. Stream restoration projects can significantly improve aquatic and riparian habitat for fish, birds, and other animals that humans enjoy encountering. Other restoration actions, such as forest thinning, can reduce the risk of fire-related loss of recreation amenities while also improving pre-fire enjoyment. Meadow restoration, process-based restoration, prescribed fire, forest road enhancements, and related projects generally have a medium correlation with improved or preserved recreational outcomes. Learn more about how to assess the value of these benefits here.<br><br>
+
+               <strong>Economic Development – Green Jobs</strong><br>
+               Restoration activities can provide employment opportunities across worker skill levels and professions. Forest management, in particular, usually requires a workforce of trained foresters, heavy equipment operators, and truck drivers, as well as biologists, planners, and permitting specialists. Other watershed health activities, such as stream and meadow restoration, sediment and erosion control, and prescribed fire tend to require smaller teams with specialized skills. While they can still contribute to a local green jobs economy, their impact is likely to be less than that associated with landscape-scale forest thinning and revegetation. Learn more about how to assess the value of these benefits here.<br><br>
+
+               <strong>Economic Development – Community Economic Development</strong><br>
+               Forest and watershed restoration activities, in general, tend to fit within the capacities and capabilities of local businesses. Funding for watershed and forest health projects can help build local “restoration economies” that benefit small to medium-sized businesses and result in direct and indirect economic outcomes within watershed communities. Project types, such as forest management, that can create local employment opportunities can be strongly correlated with local economic development. More specialized project types, such as meadow and stream restoration, can have medium correlations with contributions to local economies, while other project types that require fewer workers or are less frequently employed will have minimal correlations with economic growth or sustainability. Learn more about how to assess the value of these benefits here.<br><br>
+
+               <strong>Air Quality</strong><br>
+               Recent public health studies confirm that exposure to wildfire smoke can have significant and adverse health effects. Reducing the likelihood of catastrophic wildfire can reduce the frequency and severity of associated human health impacts. Forest and watershed projects that decrease the likelihood and severity of wildfire are positively correlated with improved air quality (and reduced adverse health consequences). While forest management has the strongest correlation, other interventions, including process-based restoration, wetland and meadow restoration, and prescribed fire, are all associated with reducing wildfire risk across watershed lands. Learn more about how to assess the value of these benefits here.<br><br>
+
+               <strong>Wildlife Habitat & Biodiversity</strong><br>
+               In addition to providing more wildfire resilience, forest and watershed health projects can improve wildlife habitat and biodiversity. Generalizing the complexity of wildlife interactions with changes in forest stand density and tree type, it’s possible that forest health projects can open forage and habitat opportunities for birds and mammals. Meadow, stream, and process-based restoration projects are likewise strongly correlated with improved habitat conditions and forage opportunities. Learn more about how to assess the value of these benefits here.
+           </p>
+
        </div>
    </div>
    <!-- Modal Structure for Legal & Accounting -->
@@ -1010,14 +1035,14 @@ function calculatePartnershipScore() {
 };
 
 const scoreMatrix = {
-    'Stream restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 } },
+    'Stream restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'INCREASED SUPPLY RESILIENCE': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 5 }},
     'Wetland/meadow restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
-    'Sediment control': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 } },
+    'Sediment control': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 10 }, 'INCREASED SUPPLY RESILIENCE': { 'Bond': 5, 'CWSRF': 10, 'DWSRF': 10 }},
     'Prescribed fire': { 'IMPROVED WATER QUALITY': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
-    'Forest Management': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
+    'Forest Management': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 5, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
     'Process based restoration': { 'IMPROVED WATER QUALITY': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
     'Stream road crossing / forest road enhancements': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
-    'Aerial mulching': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 } },
+    'Aerial mulching': { 'EROSION CONTROL': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 2 }, 'REDUCED SEDIMENTATION': { 'Bond': 10, 'CWSRF': 10, 'DWSRF': 0 } },
     'Invasive species removal': { 'INCREASED SUPPLY RESILIENCE': { 'Bond': 5, 'CWSRF': 2, 'DWSRF': 0 } },
     'Land acquisition': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } },
     'Conservation easements': { 'WATERSHED LAND CONSERVATION': { 'Bond': 5, 'CWSRF': 5, 'DWSRF': 0 } }
@@ -1338,8 +1363,19 @@ const scoreMatrix = {
         <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">Click here</a>
         to learn more about financing wildfire resilience interventions.
       `,
+      'INCREASED SUPPLY RESILIENCE': `
+        <span style="background-color: yellow;">[Intervention type]</span>
+        projects designed to increase supply resilience <span style="background-color: lime;"> may be suitable </span> to be financed
+        alongside conventional water infrastructure investments with
+        municipal bonds. Whether these interventions are <span style="background-color: lime;"> suitable </span>
+        for Colorado Water Pollution Control Revolving Fund loans <span style="background-color: lime;"> is unclear, however.</span>
+         These interventions are <span style="background-color: lime;"> likely not eligible </span>
+          for financing with Drinking Water Revolving Fund loans however. Click <a href="https://tapin.waternow.org/wildfire-resilience-financing-pathways/" style="color: blue;">here</a>
+          to learn more about financing wildfire resilience interventions.
+      `,
     }
   };
+
 
         function getBondAuthorityDescription(score) {
             switch (score) {
